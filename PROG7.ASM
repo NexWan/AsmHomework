@@ -1,0 +1,36 @@
+;Prog7.ASM 
+; EL uso de las directivas de segmento simplificadas
+
+DOSSEG
+DGROUP GROUP _DATA, CONST, STACK
+ASSUME CS:_TEXT, DS:DGROUP, SS:DGROUP
+STACK SEGMENT PARA STACK 'STACK'
+    DB 400h DUP (?)
+STACK ENDS
+CONST SEGMENT WORD PUBLIC 'CONST'
+a DW 43690
+b DW 0AaAaH
+c DW 1010101010101010b
+d DT 1234567890
+e DT -1234567890
+CONST ENDS
+
+_DATA SEGMENT WORD PUBLIC 'DATA'
+f DD 1.0
+g DD 3F800000R
+h DQ 0.1E1
+i DT 1000.0E-3
+
+_DATA ENDS
+
+_TEXT SEGMENT WORD PUBLIC 'CODE'
+inicio:
+    mov ax, DGROUP
+    mov ds, ax
+    mov ax, a
+    mov bx, b
+    mov cx, c
+    mov ax, 4C00h
+    INT 21h
+_TEXT ENDS
+    END inicio

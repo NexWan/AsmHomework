@@ -1,0 +1,27 @@
+; Programa 06
+GRUPO GROUP DATA1, STACK
+ASSUME CS:CODE, DS:GRUPO, ES:DATA2, SS:STACK
+STACK SEGMENT PARA STACK 'STACK'
+    DB 64 DUP(?)
+STACK ENDS
+
+DATA1 SEGMENT WORD 'DATA1'
+A DB'A' 
+DATA1 ENDS
+
+DATA2 SEGMENT WORD 'DATA2'
+B DB'B'
+DATA2 ENDS
+
+CODE SEGMENT WORD PUBLIC 'CODE'
+inicio:
+    mov ax, GRUPO
+    mov ds, ax
+    mov ax, DATA2
+    mov es, ax
+    mov ah, A
+    mov al, B
+    mov ax, 4C00h
+    int 21h
+CODE ENDS
+    END inicio

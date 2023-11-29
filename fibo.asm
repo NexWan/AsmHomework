@@ -12,12 +12,13 @@
     divv DB ?
     remainder DB ?
 .code
+; Imprime un caracter en formato ascii
     printF macro num
         mov ah, 2
         mov dl, num
         int 21h
     ENDM
-    
+    ; Metodo para input
     askForInput macro num
         mov ah,1
         int 21h
@@ -25,20 +26,20 @@
         dec al
         mov [num], al
     ENDM
-
+    ; Metodo para imprimir un caracter en forma de numero
     print macro num
         mov ah,2
         mov dl, num
         add dl, '0'
         int 21h
     ENDM
-    
+    ; Metodo para imprimir un string
     printS macro string
         lea dx, string
         mov ah, 9
         int 21h
     ENDM
-
+    ;Metodo para leer numeros
     getDigits MACRO num
         CYCLE1:
             mov al, num
@@ -55,11 +56,11 @@
         mov ax, @data
         mov ds, ax
         xor cx, cx
-        printS text1
-        askForInput cant
-        printS n_l
-        mov cl, cant
-        fibo:
+        printS text1 ; Se imprime el texto de input
+        askForInput cant ; Se procesa el input
+        printS n_l ; salto de linea
+        mov cl, cant ; Se mueve a cl la cantidad, si borras el label de input reemplazalo por un 7 que es hasta donde lee el programa por alguna razon
+        fibo: ; Logica para fibonacci
             getDigits z
             mov bl, x
             add z, bl
